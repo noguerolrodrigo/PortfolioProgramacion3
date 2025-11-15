@@ -1,0 +1,494 @@
+/* ========================================= */
+/* ===== RESET BÁSICO Y VARIABLES CSS ===== */
+/* ========================================= */
+/* * El '*' resetea márgenes y paddings de todos los elementos.
+ * 'box-sizing: border-box;' es una regla clave que hace que 
+ * el padding y el borde no afecten el ancho total de una caja.
+*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* * ':root' es donde definimos nuestras "Variables CSS".
+ * Si queremos cambiar un color en toda la web, solo lo cambiamos aquí.
+*/
+:root {
+    --color-fondo: #222222;
+    --color-fondo-header: #333333; 
+    --color-texto-principal: #FFFFFF;
+    --color-texto-secundario: #DDDDDD;
+    --color-destacado: #FFFFFF; 
+}
+
+/* * 'scroll-behavior: smooth;' hace que el click en los links del
+ * menú (ej: '#contacto') deslice suavemente en vez de saltar.
+*/
+html {
+    scroll-behavior: smooth;
+}
+
+/* Estilos base para toda la página */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto-principal);
+    line-height: 1.6; /* Espacio entre líneas de texto para legibilidad */
+}
+
+/* ========================================= */
+/* ===== ESTILOS GLOBALES Y UTILIDADES ===== */
+/* ========================================= */
+/* * Clases que reutilizamos en múltiples secciones 
+ * para no repetir código (principio DRY).
+*/
+
+/* Centra el contenido y le da márgenes laterales */
+.container {
+    width: 90%; /* Ocupa 90% en móvil */
+    max-width: 1100px; /* Ancho máximo en desktop */
+    margin: 0 auto; /* Centra horizontalmente */
+}
+
+/* Regla base para todas las secciones principales */
+.section-full {
+    min-height: 100vh; /* 'vh' = Viewport Height. Ocupa al menos el 100% de la altura de la pantalla. */
+    padding: 100px 0; /* Espacio arriba y abajo */
+    display: flex;
+    align-items: center; /* Centra el contenido verticalmente */
+}
+
+/* Estilo para los H2 de título de sección (ej: "Sobre Mí") */
+.titulo-seccion {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* La línea decorativa blanca de 60px debajo de los títulos */
+.titulo-seccion::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-texto-principal);
+    margin: 10px auto 0;
+}
+
+/* Tamaños base de los títulos */
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* ========================================= */
+/* ===== 1. NAVBAR (MOBILE FIRST) ===== */
+/* ========================================= */
+/* * Estos son los estilos para la barra de navegación en MÓVIL.
+ * Por defecto, la hamburguesa se ve y los links están ocultos.
+*/
+
+.navbar {
+    background-color: var(--color-fondo-header);
+    padding: 15px 0;
+    position: fixed; /* 'fixed' la pega arriba de la pantalla */
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* 'z-index' alto la pone por encima de todo */
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between; /* Logo a la izquierda, hamburguesa a la derecha */
+    align-items: center;
+    width: 90%;
+}
+
+.navbar .logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--color-texto-principal);
+    text-decoration: none; /* Saca el subrayado del link */
+}
+
+/* Por defecto (Mobile First), el menú de links está OCULTO */
+.navbar .nav-links {
+    display: none; 
+    flex-direction: column; /* Apila los links verticalmente */
+    background-color: var(--color-fondo-header);
+    position: absolute; /* Flota sobre el contenido */
+    top: 60px; /* Justo abajo del navbar */
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    border-top: 1px solid #444;
+}
+
+/* Cuando JS agrega la clase '.active', esta regla se activa y MUESTRA el menú */
+.navbar .nav-links.active {
+    display: flex; 
+}
+
+.navbar .nav-links a {
+    color: var(--color-texto-secundario);
+    text-decoration: none;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.navbar .nav-links a:hover {
+    color: var(--color-destacado);
+}
+
+/* Estilo para el link activo (controlado por JS) en MÓVIL */
+.navbar .nav-links a.active {
+    font-weight: bold;
+    color: var(--color-destacado);
+}
+
+/* Por defecto (Mobile First), el botón hamburguesa está VISIBLE */
+.hamburger {
+    display: block; 
+    background: none;
+    border: none;
+    color: var(--color-texto-principal);
+    font-size: 1.5rem;
+    cursor: pointer; /* Pone la 'manito' */
+}
+
+/* ========================================= */
+/* ===== 2. SECCIONES (MOBILE FIRST) ===== */
+/* ========================================= */
+/* * Estilos base para las secciones en MÓVIL.
+ * Todo se apila verticalmente.
+*/
+
+/* --- 2a. Layouts (Móvil) --- */
+
+/* Clase reutilizable para layouts de 2 columnas */
+.grid-dos-columnas {
+    display: flex;
+    flex-direction: column; /* Apila las columnas (foto encima de texto) */
+    gap: 30px; /* Espacio entre foto y texto */
+    align-items: center;
+    text-align: center;
+}
+
+/* Regla general para imágenes en columnas (sin bordes) */
+.columna-imagen img {
+    width: 100%;
+    max-width: 350px;
+}
+
+/* --- 2b. Sección Inicio (Móvil) --- */
+#inicio h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+#inicio p {
+    font-size: 1.1rem;
+}
+
+/* Regla ESPECÍFICA para la foto de perfil SÓLO en #inicio (móvil) */
+#inicio .columna-imagen img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover; /* Evita que la foto se estire */
+    border-radius: 50%; /* La hace redonda */
+    border: 4px solid #444;
+}
+
+/* --- 2c. Sección Herramientas (Móvil) --- */
+.stack-container {
+    display: flex;
+    flex-direction: column; /* Apila los logos de HTML/CSS/JS */
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.stack-item {
+    text-align: center;
+    /* 'transition' hace que el 'transform' del hover sea suave (0.3s) */
+    transition: transform 0.3s ease;
+}
+
+/* Efecto hover para las tarjetas de stack */
+.stack-item:hover {
+    transform: translateY(-10px); /* Mueve el item 10px hacia arriba */
+}
+
+.stack-item img {
+    width: 100px; 
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+/* --- 2d. Sección Contacto (Móvil) --- */
+.lista-contacto {
+    list-style: none; /* Saca los puntitos de la lista */
+    text-align: left;
+    margin: 30px 0;
+    display: inline-block; /* Truco para centrar la lista */
+}
+
+.lista-contacto li {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+/* Estilos para los links de Tel/GitHub/Mail */
+.lista-contacto li a {
+    color: var(--color-texto-principal);
+    text-decoration: none;
+    transition: color 0.3s, transform 0.3s ease; 
+    display: inline-block; /* Necesario para que 'transform' funcione */
+}
+
+/* Efecto hover para los links de Tel/GitHub/Mail */
+.lista-contacto li a:hover {
+    color: var(--color-texto-secundario);
+    transform: translateY(-5px); /* Se levanta 5px */
+}
+
+.lista-contacto i {
+    margin-right: 15px;
+    width: 20px; 
+    text-align: center;
+}
+
+/* Estilos para los íconos de Redes Sociales (Facebook, Insta, etc.) */
+.redes-sociales a {
+    text-decoration: none;
+    margin: 0 8px;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.redes-sociales a img {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+.redes-sociales a:hover {
+    transform: translateY(-5px); /* Mismo efecto de "levantarse" */
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* --- 2e. Formulario de Contacto (Móvil) --- */
+.contact-form {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.contact-form .form-group {
+    margin-bottom: 15px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Estilo para los campos de texto y el área de mensaje */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: var(--color-texto-principal);
+    font-size: 1rem;
+}
+
+.contact-form textarea {
+    resize: vertical; /* Permite al usuario estirar el área de texto */
+}
+
+/* Estilo del botón de Enviar */
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: var(--color-destacado);
+    color: var(--color-fondo);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #ddd;
+    color: #222;
+}
+
+.form-legend {
+    text-align: center;
+    font-style: italic;
+    color: #aaa;
+    margin-top: 10px;
+}
+
+/* ========================================= */
+/* === MEDIA QUERY: ESTILOS DE DESKTOP === */
+/* ========================================= */
+/* * Estas reglas SÓLO se aplican si el ancho de la
+ * pantalla es de 768px O MÁS.
+ * Sobrescriben los estilos de "Mobile First".
+*/
+@media (min-width: 768px) {
+
+    /* --- 1. Navbar (Desktop) --- */
+    
+    /* En desktop, OCULTAMOS el botón hamburguesa */
+    .hamburger {
+        display: none; 
+    }
+    
+    /* En desktop, MOSTRAMOS el menú de links */
+    .navbar .nav-links {
+        display: flex !important; 
+        flex-direction: row; /* Los ponemos en fila */
+        position: static; /* Ya no flota */
+        background-color: transparent;
+        width: auto;
+        padding: 0;
+        border-top: none;
+    }
+    
+    .navbar .nav-links a {
+        padding: 8px 15px;
+        margin-left: 10px;
+    }
+    
+    /* Estilo del link activo en DESKTOP (fondo blanco) */
+    .navbar .nav-links a.active {
+        background-color: var(--color-destacado);
+        color: var(--color-fondo);
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    
+    .navbar .nav-links a:hover {
+        color: var(--color-texto-secundario);
+        background-color: #444;
+        border-radius: 5px;
+    }
+    
+    .navbar .nav-links a.active:hover {
+        background-color: var(--color-destacado);
+        color: var(--color-fondo);
+    }
+    
+    /* --- 2. Layouts (Desktop) --- */
+    
+    /* Sobrescribimos el layout de 2 columnas para que sea HORIZONTAL */
+    .grid-dos-columnas {
+        flex-direction: row; /* Las pone una al lado de la otra */
+        text-align: left; 
+        gap: 50px; 
+        align-items: stretch; /* Fuerza a ambas columnas a tener la misma altura */
+    }
+    
+    /* Cada columna (imagen y texto) ocupa la mitad del espacio (50%) */
+    .columna-imagen,
+    .columna-texto {
+        flex: 1; 
+    }
+    
+    /* Regla SÓLO para el texto de 'Inicio' (para centrarlo verticalmente) */
+    #inicio .columna-texto {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-bottom: 0; 
+    }
+    
+    /* Posición del ícono de programador (SÓLO en desktop) */
+    .icono-programador-inicio {
+        position: absolute; /* Posición relativa a 'columna-texto' */
+        bottom: -40px; /* Ajusta este valor para subirlo o bajarlo */
+        
+        /* --- CORRECCIÓN DE TIPEO --- */
+        /* Tenías 'right: -10px;', lo que lo sacaba de la pantalla. */
+        /* Lo volvemos a '20px' para que tenga un margen derecho. */
+        right: 20px;
+        
+        width: 180px; 
+        height: auto;
+    }
+    
+    .icono-programador-inicio img {
+        width: 100%;
+        height: auto;
+    }
+    
+    .columna-imagen img {
+        max-width: 100%; 
+    }
+    
+    /* Restauramos la foto de perfil en DESKTOP (como en tu maqueta) */
+    #inicio .columna-imagen img {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        border-radius: 10px; /* Ya no es 50% redonda */
+        border: none;
+    }
+    
+    /* La línea decorativa al lado de "Mi Portfolio" (SÓLO en desktop) */
+    #inicio h1 {
+        display: flex;
+        align-items: center; /* Centra la línea verticalmente con el texto */
+    }
+    
+    #inicio h1::after {
+        content: '';
+        display: block;
+        height: 2px;
+        flex-grow: 1; /* Hace que la línea ocupe todo el espacio restante */
+        background-color: #777;
+        margin-left: 25px; /* Espacio entre el texto y la línea */
+    }
+    
+    /* --- 3. Herramientas (Desktop) --- */
+    .titulo-seccion {
+        font-size: 3rem;
+    }
+    
+    .stack-container {
+        flex-direction: row; /* Pone los logos en fila */
+        justify-content: space-around; 
+        gap: 20px;
+    }
+    
+    .stack-item {
+        flex: 1; 
+        max-width: 300px; 
+    }
+    
+    /* --- 4. Contacto (Desktop) --- */
+    .lista-contacto {
+        margin-left: 0;
+        display: block; 
+    }
+}
